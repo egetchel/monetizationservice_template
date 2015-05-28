@@ -21,12 +21,13 @@ import com.ezpaymentprocessing.model.PurchaseRequest;
 import com.monetizationservice.services.PromotionService;
 
 
-// http://localhost:8081/monetizationservice/rest/qualifyPromotion??merchantId=monetizationservice&mobileNumber=5556667777&amount=10
+// http://localhost:8081/monetizationservice/rest/qualifyPromotion?merchantId=monetizationservice&mobileNumber=5556667777&amount=10
 
 @Path ("/qualifyPromotion")
 public class PromotionEndpoint {
 	
 	@GET
+	@Path("/query")
 	@Produces("application/json")
 	public Response qualifyPromotion(
 			@QueryParam("merchantId") String merchantId, 
@@ -45,6 +46,7 @@ public class PromotionEndpoint {
 	}
 	
 	@POST
+	@Path("/query")
 	@Produces("application/json")
 	@Consumes("application/json")
 	public Response qualifyPromotion(PurchaseRequest purchaseRequest) 

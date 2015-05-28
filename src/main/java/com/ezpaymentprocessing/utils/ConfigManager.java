@@ -26,7 +26,7 @@ public class ConfigManager
 {
 
 	public static String PURCHASE_RESOURCE_ID = "/rest/purchase";
-	public static String PROMOTION_RESOURCE_ID = "/rest/qualifyPromotion";
+	public static String PROMOTION_RESOURCE_ID = "/rest/qualifyPromotion/query/";
 	public static String GEAR_REGISTRATION_RESOURCE_ID = "/rest/registerGear";
 	
 	private static String PAYMENT_SERVER_NAME = null;
