@@ -102,7 +102,8 @@ public class ConfigManager
 			PAYMENT_SERVER_NAME = "http://ezpaymentprocessing-egetchel.rhcloud.com"; 
 			paymentProcessingURL = PAYMENT_SERVER_NAME + PURCHASE_RESOURCE_ID;
 			
-			gearName = System.getenv("OPENSHIFT_APP_NAME");
+			//gearName = System.getenv("OPENSHIFT_APP_NAME");
+			gearName = System.getenv("OPENSHIFT_APP_DNS");
 			
 			// TODO: THE CONTEXT PATH WILL NOT WORK HERE - WE NEED THE GEAR NAME
 			PROMOTION_SERVER_NAME = "http://" + gearName + "-egetchel.rhcloud.com";

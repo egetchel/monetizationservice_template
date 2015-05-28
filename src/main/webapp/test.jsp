@@ -45,7 +45,7 @@ input, textarea, select
 REST Endpoint Test Application
 </div>
 <div class="black-border">
-Registered with Remote Endpoint: <%=ConfigManager.getRemoteRegistrationSuccessful() %>
+Registered with Remote Endpoint: <%=ConfigManager.getRemoteRegistrationSuccessful() %> <br/>
 Gear Name: <%=ConfigManager.getGearName() %>
 <br/>
 <form id="purchaseForm" method="post" action="PurchaseServlet">
