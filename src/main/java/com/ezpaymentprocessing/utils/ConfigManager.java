@@ -103,10 +103,11 @@ public class ConfigManager
 			paymentProcessingURL = PAYMENT_SERVER_NAME + PURCHASE_RESOURCE_ID;
 			
 			//gearName = System.getenv("OPENSHIFT_APP_NAME");
-			gearName = System.getenv("OPENSHIFT_APP_DNS");
+			// PROMOTION_SERVER_NAME = "http://" + gearName + "-egetchel.rhcloud.com";
 			
-			// TODO: THE CONTEXT PATH WILL NOT WORK HERE - WE NEED THE GEAR NAME
-			PROMOTION_SERVER_NAME = "http://" + gearName + "-egetchel.rhcloud.com";
+			gearName = System.getenv("OPENSHIFT_APP_DNS");
+			PROMOTION_SERVER_NAME = "http://" + gearName;
+			
 			promotionURL = PROMOTION_SERVER_NAME + PROMOTION_RESOURCE_ID;
 			
 			gearRegistrationURL = PAYMENT_SERVER_NAME + PAYMENT_SERVER_CONTEXT_ROOT + GEAR_REGISTRATION_RESOURCE_ID;
