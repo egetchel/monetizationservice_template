@@ -46,9 +46,10 @@ REST Endpoint Test Application
 </div>
 <div class="black-border">
 Registered with Remote Endpoint: <%=ConfigManager.getRemoteRegistrationSuccessful() %> <br/>
-Gear Name: <%=ConfigManager.getGearName() %>
+Gear Name: <%=ConfigManager.getGearName() %><br/>
+Fully Qualified Name: <%=ConfigManager.getPromotionURL() %>
 <br/>
-<form id="purchaseForm" method="post" action="PurchaseServlet">
+<form id="purchaseForm" method="post" action="PurchaseServlet"> 
 <input type="hidden" name="merchantId" id="merchantId" value="<%=ConfigManager.getGearName()%>">
 <br/>
 <table>
