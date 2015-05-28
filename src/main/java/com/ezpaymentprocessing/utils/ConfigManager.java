@@ -42,6 +42,8 @@ public class ConfigManager
 	private static String promotionURL = null;
 	private static String gearRegistrationURL = null;
 	
+	private static Boolean remoteRegistrationSuccessful = Boolean.FALSE;
+	
 
 	
 	
@@ -100,8 +102,10 @@ public class ConfigManager
 			PAYMENT_SERVER_NAME = "http://ezpaymentprocessing-egetchel.rhcloud.com"; 
 			paymentProcessingURL = PAYMENT_SERVER_NAME + PURCHASE_RESOURCE_ID;
 			
+			gearName = System.getenv("OPENSHIFT_APP_NAME");
+			
 			// TODO: THE CONTEXT PATH WILL NOT WORK HERE - WE NEED THE GEAR NAME
-			PROMOTION_SERVER_NAME = "http://" + contextPath + "-egetchel.rhcloud.com";
+			PROMOTION_SERVER_NAME = "http://" + gearName + "-egetchel.rhcloud.com";
 			promotionURL = PROMOTION_SERVER_NAME + PROMOTION_RESOURCE_ID;
 			
 			gearRegistrationURL = PAYMENT_SERVER_NAME + PAYMENT_SERVER_CONTEXT_ROOT + GEAR_REGISTRATION_RESOURCE_ID;
@@ -159,6 +163,18 @@ public class ConfigManager
 
 	public static String getGearPort() {
 		return gearPort;
+	}
+	
+	
+
+	public static Boolean getRemoteRegistrationSuccessful() 
+	{
+		return remoteRegistrationSuccessful;
+	}
+
+	public static void setRemoteRegistrationSuccessful(Boolean remoteRegistrationSuccessful) 
+	{
+		ConfigManager.remoteRegistrationSuccessful = remoteRegistrationSuccessful;
 	}
 
 	/**

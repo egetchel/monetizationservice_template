@@ -17,6 +17,7 @@ public class StartupListener implements ServletContextListener
 	public void contextInitialized(ServletContextEvent contextEvent) 
 	{
 		System.out.println("Context Created Event");
+		
 		context = contextEvent.getServletContext();
 		String contextPath = context.getContextPath();
 		
@@ -28,6 +29,7 @@ public class StartupListener implements ServletContextListener
 			try
 			{
 				client.sendGet(ConfigManager.getGearRegistrationURL(), "hostName=" + ConfigManager.getPromotionServerName()+ "&gearName=" + ConfigManager.getGearName());
+				ConfigManager.setRemoteRegistrationSuccessful(Boolean.TRUE);
 			}
 			catch (Exception e)
 			{
