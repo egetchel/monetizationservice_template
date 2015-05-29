@@ -86,20 +86,22 @@ public class ConfigManager
 			
 			// Payment Server is always hard coded
 			PAYMENT_SERVER_NAME = "http://localhost:8080/"; 
-			paymentProcessingURL = PAYMENT_SERVER_NAME + PAYMENT_SERVER_CONTEXT_ROOT+ PURCHASE_RESOURCE_ID;
+			paymentProcessingURL = PAYMENT_SERVER_NAME + PAYMENT_SERVER_CONTEXT_ROOT + PURCHASE_RESOURCE_ID;
 			
 			PROMOTION_SERVER_NAME = "http://localhost:" + gearPort ;
 			PROMOTION_SERVER_CONTEXT_ROOT = contextPath;
 			promotionURL = PROMOTION_SERVER_NAME + PROMOTION_SERVER_CONTEXT_ROOT + PROMOTION_RESOURCE_ID;
 			
 			// The Gear registration service resides on the Payment Server
-			gearRegistrationURL = PAYMENT_SERVER_NAME + GEAR_REGISTRATION_RESOURCE_ID;
+			gearRegistrationURL = PAYMENT_SERVER_NAME + PAYMENT_SERVER_CONTEXT_ROOT + GEAR_REGISTRATION_RESOURCE_ID;
 			
 		}
 		else
 		{
 			// Payment Server is always hard coded
-			PAYMENT_SERVER_NAME = "http://ezpaymentprocessing-egetchel.rhcloud.com"; 
+			PAYMENT_SERVER_NAME = "http://ezpaymentprocessing-egetchel.rhcloud.com";
+			// There is no context root when running in OpenShift, so clean it out in case it's used accidentally.
+			PAYMENT_SERVER_CONTEXT_ROOT = "";
 			paymentProcessingURL = PAYMENT_SERVER_NAME + PURCHASE_RESOURCE_ID;
 			
 			//gearName = System.getenv("OPENSHIFT_APP_NAME");
