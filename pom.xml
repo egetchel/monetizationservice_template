@@ -17,6 +17,13 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
+		<repository>
+          <id>central</id>
+          <url>https://repo1.maven.org/maven2</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+        </repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
@@ -29,6 +36,13 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</pluginRepository>
+		<pluginRepository>
+          <id>central</id>
+          <url>https://repo1.maven.org/maven2</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+        </pluginRepository>
 	</pluginRepositories>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -60,14 +74,16 @@
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
-			<version>2.3.8.SP2-redhat-3</version>
+			<version>3.0.11.Final</version>
+			<!--  <version>2.3.8.SP2-redhat-3</version>-->
 			<!--  <version>2.3.8.Final-redhat-3</version>-->
 		</dependency>
 		
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxb-provider</artifactId>
-			<version>2.3.8.SP2-redhat-3</version>
+			<version>3.0.11.Final</version>
+			<!--  <version>2.3.8.SP2-redhat-3</version>-->
 			<!--  <version>2.3.8.Final-redhat-3</version>-->
 
 		</dependency>		
@@ -75,16 +91,11 @@
 	<dependency>
 		<groupId>org.jboss.resteasy</groupId>
 		<artifactId>resteasy-jackson-provider</artifactId>
-			<version>2.3.8.SP2-redhat-3</version>
+			<version>3.0.11.Final</version>
+			<!--  <version>2.3.8.SP2-redhat-3</version>-->
 			<!--  <version>2.3.8.Final-redhat-3</version>-->
 
 	</dependency>
-	
-	 <dependency>
-      <groupId>commons-io</groupId>
-	  <artifactId>commons-io</artifactId>
-      <version>1.4</version>
-    </dependency>
 	
 <!--  	
 	<dependency>
