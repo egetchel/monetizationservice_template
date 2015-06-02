@@ -14,7 +14,7 @@ public class PromotionService {
 		int purchaseAmount = purchaseRequest.getAmount();
 		if (purchaseAmount > 10)
 		{
-			return "You have qualified for a 5% off coupon on your next purhcase.\n Another value-added service brought to you by EZ-Payment Processing";
+			return "You have qualified for a 5% off coupon on your next purhcase at "+purchaseRequest.getMerchantId() + ". Another value-added service brought to you by EZ-Payment Processing";
 		}
 		return null;
 	}
