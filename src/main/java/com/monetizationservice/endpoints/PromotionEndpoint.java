@@ -18,7 +18,10 @@ import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 
 import com.ezpaymentprocessing.model.PurchaseRequest;
+import com.ezpaymentprocessing.utils.ConfigManager;
+import com.ezpaymentprocessing.utils.RestClient;
 import com.monetizationservice.services.PromotionService;
+import com.monetizationservice.services.SmsService;
 
 
 // http://localhost:8081/monetizationservice/rest/qualifyPromotion?merchantId=monetizationservice&mobileNumber=5556667777&amount=10
@@ -65,9 +68,17 @@ public class PromotionEndpoint {
 		{
 			//https://redhatmw-t-signw940wumytdo57zlpx2eq-dev.ac.gen.ric.feedhenry.com/promotion?mobileNumber=555&message=XYZ
 			System.out.println("Invoking promotion Push Notification...\n");
-			try {
+			try 
+			{
+				// Send to Feed Henry
+				RestClient client = new RestClient(); 
+				client.sendGet("https://redhatmw-t-signw940wumytdo57zlpx2eq-dev.ac.gen.ric.feedhenry.com/promotion", purchaseRequest.getMobileNumber()+"&message="+message);
 				
-			  			
+				// Send to Twilio
+				SmsService smsClient = new SmsService();
+				smsClient.send(purchaseRequest.getMobileNumber(), message);
+				
+/*			  			
 				ClientRequest request = new ClientRequest("https://redhatmw-t-signw940wumytdo57zlpx2eq-dev.ac.gen.ric.feedhenry.com/promotion?mobileNumber="+purchaseRequest.getMobileNumber()+"&message="+message);
 				request.accept("application/json");
 				ClientResponse<String> response = request.get(String.class);
@@ -85,7 +96,7 @@ public class PromotionEndpoint {
 				while ((output = br.readLine()) != null) {
 					System.out.println(output);
 				}
-		 
+*/		 
 			  } 
 		  catch (Exception E)
 		  {
