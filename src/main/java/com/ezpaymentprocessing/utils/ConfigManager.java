@@ -109,7 +109,7 @@ public class ConfigManager
 			
 			gearName = System.getenv("OPENSHIFT_APP_DNS");
 			// remove the trailing slash
-			PROMOTION_SERVER_NAME = "http://" + gearName.substring(0, gearName.length()-1);
+			PROMOTION_SERVER_NAME = "http://" + gearName.substring(0, gearName.length());
 			
 			promotionURL = PROMOTION_SERVER_NAME + PROMOTION_RESOURCE_ID;
 			
