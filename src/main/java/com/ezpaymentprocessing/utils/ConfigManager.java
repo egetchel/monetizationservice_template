@@ -108,7 +108,8 @@ public class ConfigManager
 			// PROMOTION_SERVER_NAME = "http://" + gearName + "-egetchel.rhcloud.com";
 			
 			gearName = System.getenv("OPENSHIFT_APP_DNS");
-			PROMOTION_SERVER_NAME = "http://" + gearName;
+			// remove the trailing slash
+			PROMOTION_SERVER_NAME = "http://" + gearName.substring(1);
 			
 			promotionURL = PROMOTION_SERVER_NAME + PROMOTION_RESOURCE_ID;
 			
