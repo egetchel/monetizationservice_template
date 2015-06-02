@@ -28,7 +28,7 @@ public class StartupListener implements ServletContextListener
 			RestClient client = new RestClient(); 
 			try
 			{
-				client.sendGet(ConfigManager.getGearRegistrationURL(), "merchantId=" + ConfigManager.getGearName()+ "&promotionURL=" + ConfigManager.getPromotionURL());
+				client.sendGet(ConfigManager.getGearRegistrationURL(), "merchantId=" + ConfigManager.getGearName()+ "&promotionUrl=" + ConfigManager.getPromotionURL());
 				ConfigManager.setRemoteRegistrationSuccessful(Boolean.TRUE);
 			}
 			catch (Exception e)
