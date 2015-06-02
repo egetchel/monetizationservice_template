@@ -112,6 +112,9 @@ public class ConfigManager
 			
 			promotionURL = PROMOTION_SERVER_NAME + PROMOTION_RESOURCE_ID;
 			
+			// need to pass the gear name as a blank so that we don't double-prefix.
+			gearName = "";
+			
 			gearRegistrationURL = PAYMENT_SERVER_NAME +  GEAR_REGISTRATION_RESOURCE_ID;
 
 		}
