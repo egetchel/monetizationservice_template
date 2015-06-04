@@ -26,15 +26,14 @@ public class ConfigManager
 {
 
 	public static String PURCHASE_RESOURCE_ID = "/rest/purchase";
-	public static String PROMOTION_RESOURCE_ID = "/rest/qualifyPromotion/query/";
+	public static String PROMOTION_RESOURCE_ID = "/rest/qualifyPromotion/";
 	public static String GEAR_REGISTRATION_RESOURCE_ID = "/rest/registerGear";
 	
 	private static String PAYMENT_SERVER_NAME = null;
 	private static String PROMOTION_SERVER_NAME = null;
-	//private static String GEAR_REGISTRATION_SERVER_NAME = null;
 	
 	private static String PAYMENT_SERVER_CONTEXT_ROOT = "ezpaymentprocessing";
-	// Dyanamically calculated at server startup
+	// Dynamically calculated at server startup
 	private static String PROMOTION_SERVER_CONTEXT_ROOT = null;
 	
 	// Fully qualified URLs of the REST endpoints

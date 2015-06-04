@@ -3,7 +3,7 @@ package com.ezpaymentprocessing.model;
 /**
  * Data object modeling a purchase request.
  * 
- * @author egetchel
+ * @author E. Getchell
  *
  */
 public class PurchaseRequest {

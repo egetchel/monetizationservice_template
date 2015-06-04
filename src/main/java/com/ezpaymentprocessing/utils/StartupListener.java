@@ -1,14 +1,21 @@
 package com.ezpaymentprocessing.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.ws.rs.HttpMethod;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 
 /**
  * Class to listed for the start event from the servlet container.  This is used to signal the
  * static configuration management class to determine where we are running (locally or on OpenShift) and
  * to generate endpoint URLs
- * @author egetchel
+ * @author E. Getchell
  *
  */
 public class StartupListener implements ServletContextListener
@@ -28,7 +35,10 @@ public class StartupListener implements ServletContextListener
 			RestClient client = new RestClient(); 
 			try
 			{
-				client.sendGet(ConfigManager.getGearRegistrationURL(), "merchantId=" + ConfigManager.getGearName()+ "&promotionUrl=" + ConfigManager.getPromotionURL());
+				List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+				parameters.add(new BasicNameValuePair("merchantId", ConfigManager.getGearName()));
+				parameters.add(new BasicNameValuePair("promotionUrl", ConfigManager.getPromotionURL()));
+				client.sendRequest(ConfigManager.getGearRegistrationURL(), parameters, HttpMethod.POST, String.class);
 				ConfigManager.setRemoteRegistrationSuccessful(Boolean.TRUE);
 			}
 			catch (Exception e)

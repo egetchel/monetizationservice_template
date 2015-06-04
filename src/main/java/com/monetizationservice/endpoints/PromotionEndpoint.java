@@ -1,12 +1,12 @@
 package com.monetizationservice.endpoints;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.HttpMethod;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -14,11 +14,11 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
-import org.jboss.resteasy.client.ClientRequest;
-import org.jboss.resteasy.client.ClientResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 
 import com.ezpaymentprocessing.model.PurchaseRequest;
-import com.ezpaymentprocessing.utils.ConfigManager;
+import com.ezpaymentprocessing.model.QualifyPromotionResponse;
 import com.ezpaymentprocessing.utils.RestClient;
 import com.monetizationservice.services.PromotionService;
 import com.monetizationservice.services.SmsService;
@@ -30,7 +30,6 @@ import com.monetizationservice.services.SmsService;
 public class PromotionEndpoint {
 	
 	@GET
-	@Path("/query")
 	@Produces("application/json")
 	public Response qualifyPromotion(
 			@QueryParam("merchantId") String merchantId, 
@@ -44,12 +43,12 @@ public class PromotionEndpoint {
 		purchaseRequest.setMobileNumber(mobileNumber);
 		qualify(purchaseRequest);
 		System.out.println("[GET] qualifyPromotion: MerchantId[" + merchantId + "] Amount: [ " + amount + "] Mobile Phone: [" + mobileNumber +"] for contextPath: " + request.getContextPath());
-		return Response.status(200).entity("{\"status\": \"OK\"}").build();
+		QualifyPromotionResponse qualifyResponse = new QualifyPromotionResponse();
+		return Response.status(200).entity(qualifyResponse).build();
  
 	}
 	
 	@POST
-	@Path("/query")
 	@Produces("application/json")
 	@Consumes("application/json")
 	public Response qualifyPromotion(PurchaseRequest purchaseRequest) 
@@ -71,32 +70,18 @@ public class PromotionEndpoint {
 			try 
 			{
 				// Send to Feed Henry
-				RestClient client = new RestClient(); 
-				client.sendGet("https://redhatmw-t-signw940wumytdo57zlpx2eq-dev.ac.gen.ric.feedhenry.com/promotion", purchaseRequest.getMobileNumber()+"&message="+message);
+				RestClient client = new RestClient();
+				List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+				parameters.add(new BasicNameValuePair("merchantId", purchaseRequest.getMerchantId()));
+				parameters.add(new BasicNameValuePair("mobileNumber", purchaseRequest.getMobileNumber()));
+				parameters.add(new BasicNameValuePair("message", message));
+				
+				client.sendRequest("https://redhatmw-t-signw940wumytdo57zlpx2eq-dev.ac.gen.ric.feedhenry.com/promotion", parameters, HttpMethod.GET, String.class); 
 				
 				// Send to Twilio
 				SmsService smsClient = new SmsService();
 				smsClient.send(purchaseRequest.getMobileNumber(), message);
-				
-/*			  			
-				ClientRequest request = new ClientRequest("https://redhatmw-t-signw940wumytdo57zlpx2eq-dev.ac.gen.ric.feedhenry.com/promotion?mobileNumber="+purchaseRequest.getMobileNumber()+"&message="+message);
-				request.accept("application/json");
-				ClientResponse<String> response = request.get(String.class);
 		 
-				if (response.getStatus() != 200) {
-					throw new RuntimeException("Failed : HTTP error code : "
-						+ response.getStatus());
-				}
-		 
-				BufferedReader br = new BufferedReader(new InputStreamReader(
-					new ByteArrayInputStream(response.getEntity().getBytes())));
-		 
-				String output;
-				System.out.println("Output from Server .... ");
-				while ((output = br.readLine()) != null) {
-					System.out.println(output);
-				}
-*/		 
 			  } 
 		  catch (Exception E)
 		  {
