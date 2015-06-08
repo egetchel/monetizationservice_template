@@ -102,11 +102,8 @@ public class ConfigManager
 			// There is no context root when running in OpenShift, so clean it out in case it's used accidentally.
 			PAYMENT_SERVER_CONTEXT_ROOT = "";
 			paymentProcessingURL = PAYMENT_SERVER_NAME + PURCHASE_RESOURCE_ID;
-			
-			//gearName = System.getenv("OPENSHIFT_APP_NAME");
-			// PROMOTION_SERVER_NAME = "http://" + gearName + "-egetchel.rhcloud.com";
-			
 			gearName = System.getenv("OPENSHIFT_APP_DNS");
+			gearName = gearName.substring(0, contextPath.indexOf('-'));
 			// remove the trailing slash
 			PROMOTION_SERVER_NAME = "http://" + gearName;
 			
