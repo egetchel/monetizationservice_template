@@ -97,6 +97,8 @@ public class ConfigManager
 		}
 		else
 		{
+			try 
+			{
 			// Payment Server is always hard coded
 			PAYMENT_SERVER_NAME = "http://ezpaymentprocessing-egetchel.rhcloud.com";
 			// There is no context root when running in OpenShift, so clean it out in case it's used accidentally.
@@ -104,6 +106,8 @@ public class ConfigManager
 			paymentProcessingURL = PAYMENT_SERVER_NAME + PURCHASE_RESOURCE_ID;
 			
 			String dnsName = System.getenv("OPENSHIFT_APP_DNS");
+			
+			System.out.println("DNS Name: " + dnsName);
 			
 			// remove the trailing slash
 			PROMOTION_SERVER_NAME = "http://" + dnsName;
@@ -117,6 +121,11 @@ public class ConfigManager
 			// need to pass the gear name as a blank so that we don't double-prefix.
 			
 			gearRegistrationURL = PAYMENT_SERVER_NAME +  GEAR_REGISTRATION_RESOURCE_ID;
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
 
 		}
 	}
