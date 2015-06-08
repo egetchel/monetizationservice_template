@@ -112,8 +112,8 @@ public class ConfigManager
 			// remove the trailing slash
 			PROMOTION_SERVER_NAME = "http://" + dnsName;
 			
-
-			gearName = dnsName.substring(0, contextPath.indexOf('-'));
+			
+			gearName = dnsName.substring(0,dnsName.indexOf('-'));
 
 			
 			promotionURL = PROMOTION_SERVER_NAME + PROMOTION_RESOURCE_ID;
