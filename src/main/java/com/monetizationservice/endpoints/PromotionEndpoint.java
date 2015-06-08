@@ -17,8 +17,9 @@ import javax.ws.rs.core.Response;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.ezpaymentprocessing.model.GenericResponse;
 import com.ezpaymentprocessing.model.PurchaseRequest;
-import com.ezpaymentprocessing.model.QualifyPromotionResponse;
+import com.ezpaymentprocessing.model.QualifyPromotionFact;
 import com.ezpaymentprocessing.utils.RestClient;
 import com.monetizationservice.services.PromotionService;
 import com.monetizationservice.services.SmsService;
@@ -43,7 +44,8 @@ public class PromotionEndpoint {
 		purchaseRequest.setMobileNumber(mobileNumber);
 		qualify(purchaseRequest);
 		System.out.println("[GET] qualifyPromotion: MerchantId[" + merchantId + "] Amount: [ " + amount + "] Mobile Phone: [" + mobileNumber +"] for contextPath: " + request.getContextPath());
-		QualifyPromotionResponse qualifyResponse = new QualifyPromotionResponse();
+		// Simply return the fact that we received the qualification request
+		GenericResponse qualifyResponse = new GenericResponse();
 		return Response.status(200).entity(qualifyResponse).build();
  
 	}
@@ -55,15 +57,18 @@ public class PromotionEndpoint {
 	{
 		System.out.println("[POST] qualifyPromotion(PurchaseRequest): " + purchaseRequest);
 		qualify(purchaseRequest);
-		return Response.status(200).entity("{\"status\": \"OK\"}").build();
+		// Simply return the fact that we received the qualification request
+		GenericResponse qualifyResponse = new GenericResponse();
+		return Response.status(200).entity(qualifyResponse).build();
+
 	}
 	
 	
 	private void qualify(PurchaseRequest purchaseRequest)
 	{
-		String message = PromotionService.qualifiy(purchaseRequest);
+		QualifyPromotionFact fact = PromotionService.qualifiy(purchaseRequest);
 		
-		if (message != null)
+		if (fact.isQualified())
 		{
 			//https://redhatmw-t-signw940wumytdo57zlpx2eq-dev.ac.gen.ric.feedhenry.com/promotion?mobileNumber=555&message=XYZ
 			System.out.println("Invoking promotion Push Notification...\n");
@@ -74,13 +79,13 @@ public class PromotionEndpoint {
 				List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 				parameters.add(new BasicNameValuePair("merchantId", purchaseRequest.getMerchantId()));
 				parameters.add(new BasicNameValuePair("mobileNumber", purchaseRequest.getMobileNumber()));
-				parameters.add(new BasicNameValuePair("message", message));
+				parameters.add(new BasicNameValuePair("message", fact.getMessage()));
 				
 				client.sendRequest("https://redhatmw-t-signw940wumytdo57zlpx2eq-dev.ac.gen.ric.feedhenry.com/promotion", parameters, HttpMethod.GET, String.class); 
 				
 				// Send to Twilio
 				SmsService smsClient = new SmsService();
-				smsClient.send(purchaseRequest.getMobileNumber(), message);
+				smsClient.send(purchaseRequest.getMobileNumber(), fact.getMessage());
 		 
 			  } 
 		  catch (Exception E)

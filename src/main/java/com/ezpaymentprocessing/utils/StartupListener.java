@@ -11,6 +11,8 @@ import javax.ws.rs.HttpMethod;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.monetizationservice.services.PromotionService;
+
 /**
  * Class to listed for the start event from the servlet container.  This is used to signal the
  * static configuration management class to determine where we are running (locally or on OpenShift) and
@@ -46,6 +48,8 @@ public class StartupListener implements ServletContextListener
 				System.out.println("WARNING: Could not register remote service. " + e.getMessage());
 			}
 		}
+		
+		PromotionService.start();
 		
 		// set variable to servlet context
 		//context.setAttribute("TEST", "TEST_VALUE");

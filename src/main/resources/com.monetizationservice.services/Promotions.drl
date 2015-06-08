@@ -1,0 +1,15 @@
+package com.monetizationservice.services
+
+import com.ezpaymentprocessing.model.QualifyPromotionFact;
+
+rule "Qualify"
+    dialect "java"
+    when
+        $qualifyPromotionFact : QualifyPromotionFact( purchaseAmount > 10 )
+    then
+        System.out.println( "Qualification rule fired" );
+        $qualifyPromotionFact.setQualified(true);
+        $qualifyPromotionFact.setDiscount(5);
+        $qualifyPromotionFact.setMessage("You have qualified for a " + $qualifyPromotionFact.getDiscount() + "% off coupon on your next purchase at " + $qualifyPromotionFact.getMerchantId());
+        
+end
