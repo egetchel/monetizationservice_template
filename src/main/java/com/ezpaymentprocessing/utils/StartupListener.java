@@ -50,9 +50,7 @@ public class StartupListener implements ServletContextListener
 		}
 		
 		PromotionService.start();
-		
-		// set variable to servlet context
-		//context.setAttribute("TEST", "TEST_VALUE");
+
 	}
 	public void contextDestroyed(ServletContextEvent contextEvent) 
 	{

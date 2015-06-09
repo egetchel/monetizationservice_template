@@ -5,7 +5,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import javax.management.AttributeNotFoundException;
@@ -42,10 +41,6 @@ public class ConfigManager
 	private static String gearRegistrationURL = null;
 	
 	private static Boolean remoteRegistrationSuccessful = Boolean.FALSE;
-	
-
-	
-	
 	
 	private static String gearName = null;
 	private static String gearPort = null;
@@ -108,22 +103,18 @@ public class ConfigManager
 			String dnsName = System.getenv("OPENSHIFT_APP_DNS");
 			
 			System.out.println("DNS Name: " + dnsName);
-			
-			// remove the trailing slash
 			PROMOTION_SERVER_NAME = "http://" + dnsName;
 			
-			
+			// Remove everything to the right of the dash in the FQN DNS name.
 			gearName = dnsName.substring(0,dnsName.indexOf('-'));
-
 			
 			promotionURL = PROMOTION_SERVER_NAME + PROMOTION_RESOURCE_ID;
-			
-			// need to pass the gear name as a blank so that we don't double-prefix.
-			
+		
 			gearRegistrationURL = PAYMENT_SERVER_NAME +  GEAR_REGISTRATION_RESOURCE_ID;
 			}
 			catch (Exception e)
 			{
+				// Something happened in the string parsing... dump the exception
 				e.printStackTrace();
 			}
 

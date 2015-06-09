@@ -37,14 +37,31 @@ input, textarea, select
 {
 	width:600px;
 }
+.upperCornersRound, .allCornersRound {
+	border-top-left-radius: 0.5em;
+	border-top-right-radius: 0.5em;
+	-moz-border-radius-topleft: 0.5em;
+	-moz-border-radius-topright: 0.5em;
+	-webkit-border-top-left-radius: 0.5em;
+	-webkit-border-top-right-radius: 0.5em;
+}
+.lowerCornersRound, .allCornersRound {
+	border-bottom-left-radius: 0.5em;
+	border-bottom-right-radius: 0.5em;
+	-moz-border-radius-bottomleft: 0.5em;
+	-moz-border-radius-bottomright: 0.5em;
+	-webkit-border-bottom-left-radius: 0.5em;
+	-webkit-border-bottom-right-radius: 0.5em;
+}
 </style>
 </head>
 <body>
-<div class="wrapper">
-<div class="black-border text-center">
-Welcome to <%=ConfigManager.getGearName()%>
+<div class="">
+<div class="black-border text-center upperCornersRound">
+Welcome to the <%=ConfigManager.getGearName()%> mobile app
 </div>
-<br/>
+<div class="black-border lowerCornersRound">
+<img src="images/Red_Hat_RGB_150px.jpg" align="right"/>
 <form id="purchaseForm" method="post" action="PurchaseServlet"> 
 <input type="hidden" name="merchantId" id="merchantId" value="<%=ConfigManager.getGearName()%>">
 <br/>
@@ -71,7 +88,8 @@ Welcome to <%=ConfigManager.getGearName()%>
 </table>		
 </form>
 </div>
-<div id="result"></div>
+<div id="result">&nbsp;</div>
+</div>
 <script type="text/javascript">
 function submitRestPost(restEndpoint) 
 {
