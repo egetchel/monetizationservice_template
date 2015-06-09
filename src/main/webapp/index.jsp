@@ -70,9 +70,9 @@ Welcome to the <%=ConfigManager.getGearName()%> mobile app
 		<td>Amount:</td>
 		<td>	
 			<select name="amount" id="amount">
-	  		<option value="10">$10</option>
-	  		<option value="20">$20</option>
-  			<option value="30">$30</option>
+	  		<option value="10">Earphones - $10</option>
+	  		<option value="20">Bluetooth Reciever - $50</option>
+  			<option value="30">Anthem Preamp - $2,500</option>
 			</select>
 		</td>
 	 </tr>
