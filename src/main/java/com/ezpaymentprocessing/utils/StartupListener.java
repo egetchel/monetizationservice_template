@@ -56,6 +56,11 @@ public class StartupListener implements ServletContextListener
 	{
 		context = contextEvent.getServletContext();
 		System.out.println("Context Destroyed");
+		RestClient client = new RestClient(); 
+		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+		parameters.add(new BasicNameValuePair("merchantId", ConfigManager.getGearName()));
+		client.sendRequest(ConfigManager.getGearRegistrationURL(), parameters, HttpMethod.POST, String.class);
+
 	}
 } 
 

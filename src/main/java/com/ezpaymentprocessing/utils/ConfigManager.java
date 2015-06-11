@@ -27,6 +27,7 @@ public class ConfigManager
 	public static String PURCHASE_RESOURCE_ID = "/rest/purchase";
 	public static String PROMOTION_RESOURCE_ID = "/rest/qualifyPromotion/";
 	public static String GEAR_REGISTRATION_RESOURCE_ID = "/rest/registerGear";
+	public static String GEAR_UNREGISTRATION_RESOURCE_ID = "/rest/unregisterGear";
 	
 	private static String PAYMENT_SERVER_NAME = null;
 	private static String PROMOTION_SERVER_NAME = null;
@@ -39,6 +40,7 @@ public class ConfigManager
 	private static String paymentProcessingURL = null;
 	private static String promotionURL = null;
 	private static String gearRegistrationURL = null;
+	private static String gearUnregistrationURL = null;
 	
 	private static Boolean remoteRegistrationSuccessful = Boolean.FALSE;
 	
@@ -88,6 +90,7 @@ public class ConfigManager
 			
 			// The Gear registration service resides on the Payment Server
 			gearRegistrationURL = PAYMENT_SERVER_NAME + PAYMENT_SERVER_CONTEXT_ROOT + GEAR_REGISTRATION_RESOURCE_ID;
+			gearUnregistrationURL = PAYMENT_SERVER_NAME + PAYMENT_SERVER_CONTEXT_ROOT + GEAR_UNREGISTRATION_RESOURCE_ID;
 			
 		}
 		else
@@ -148,17 +151,21 @@ public class ConfigManager
 	
 	/**
 	 * Returns the URL where applications need to register themselves to.
-	 * For runnign in the ezpaymentprocessing application, this will be null (as all applications register themselves with it
-	 * All others applications will point to the ezpaymentprocessing application
 	 * @return
 	 */
 	public static String getGearRegistrationURL()
 	{
 		return gearRegistrationURL;
 	}
-	
-	
-	
+
+	/**Unregistration endpoint for when this application is shutting down
+	 * 
+	 * @return
+	 */
+	public static String getGearUnregistrationURL() {
+		return gearUnregistrationURL;
+	}
+
 	/**
 	 * Return the name of this gear (or application, if working locally)
 	 * @return
