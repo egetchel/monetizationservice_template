@@ -78,7 +78,7 @@ Welcome to the <%=ConfigManager.getGearName()%> mobile app
 	 </tr>
 	<tr>
 		<td>Mobile Number:</td>
-		<td><input type="text" name="mobileNumber" id="mobileNumber" value="6173124838"></td>
+		<td><input type="text" name="mobileNumber" id="mobileNumber" value=""></td>
 	 <tr>
 	 	<td>&nbsp;</td>
 	 	<td>
