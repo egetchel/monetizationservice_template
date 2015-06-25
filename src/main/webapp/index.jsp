@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.ezpaymentprocessing.utils.ConfigManager" %> 
+<%@ page import="com.ezpaymentprocessing.utils.ConfigManager" %>
+<%@ page import="com.ezpaymentprocessing.model.InventoryItem" %>  
+<%@ page import="java.util.*" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -70,9 +72,22 @@ Welcome to the <%=ConfigManager.getGearName()%> mobile app
 		<td>Amount:</td>
 		<td>	
 			<select name="amount" id="amount">
-	  		<option value="10">Earphones - $10</option>
-	  		<option value="50">Bluetooth Receiver - $50</option>
-  			<option value="2500">Anthem Preamplifier - $2,500</option>
+<%
+// Because I don't want to fight JSTL tags when Static classes/methods are involved...
+
+			List<InventoryItem> inventory = ConfigManager.getInventory();
+			if (inventory != null)
+			{
+				for (InventoryItem inventoryItem : inventory)
+				{
+
+					
+%>			
+	  		<option value="<%=inventoryItem.getPrice()%>"><%=inventoryItem.getDescription()%> - $<%=inventoryItem.getPrice()%></option>
+<% 
+				}//end for
+			}// end if
+%>
 			</select>
 		</td>
 	 </tr>

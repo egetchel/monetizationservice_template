@@ -4,7 +4,10 @@ import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.management.AttributeNotFoundException;
@@ -15,6 +18,8 @@ import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 import javax.management.Query;
 import javax.management.ReflectionException;
+
+import com.ezpaymentprocessing.model.InventoryItem;
 
 /**
  * Class to manage programatically defined configuration information, such as REST URLs 
@@ -49,6 +54,8 @@ public class ConfigManager
 	
 	
 	private static boolean isLocal = false;
+	
+	private static List<InventoryItem> inventory = new ArrayList<InventoryItem>();
 	
 	
 	public static void generateRestUrls(String contextPath)
@@ -122,6 +129,9 @@ public class ConfigManager
 			}
 
 		}
+		
+		
+		
 	}
 	
 	/**
@@ -190,6 +200,16 @@ public class ConfigManager
 	public static void setRemoteRegistrationSuccessful(Boolean remoteRegistrationSuccessful) 
 	{
 		ConfigManager.remoteRegistrationSuccessful = remoteRegistrationSuccessful;
+	}
+	
+	
+
+	public static List<InventoryItem> getInventory() {
+		return inventory;
+	}
+
+	public static void setInventory(List<InventoryItem> inventory) {
+		ConfigManager.inventory = inventory;
 	}
 
 	/**

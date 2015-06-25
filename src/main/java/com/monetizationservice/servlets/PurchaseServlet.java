@@ -62,6 +62,12 @@ public class PurchaseServlet extends HttpServlet {
 		parameters.add(new BasicNameValuePair("mobileNumber", mobileNumber));
 
 		PurchaseResponse purchaseResponse = (PurchaseResponse) client.sendRequest(ConfigManager.getPaymentProcessingURL(), parameters, HttpMethod.GET, PurchaseResponse.class);
+		if (purchaseResponse == null)
+		{
+			purchaseResponse = new PurchaseResponse();
+			purchaseResponse.setMessage("Null response from purchase service");
+			purchaseResponse.setApproved(false);
+		}
 		// Total hack
 		JSONObject obj = new JSONObject();
 		obj.put("approved", purchaseResponse.isApproved());
@@ -70,6 +76,7 @@ public class PurchaseServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.print(obj);
 		out.flush();
+
 		return;
 		
 	}
