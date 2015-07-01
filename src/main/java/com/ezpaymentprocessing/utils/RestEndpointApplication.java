@@ -8,6 +8,15 @@ import com.monetizationservice.endpoints.PromotionEndpoint;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Class used to manually register REST endpoints with an application container
+ * 
+ * This is being used as the annotation scanner for RestEasy does not seem to fire in OSE V2, but
+ * will fire locally.
+ * 
+ * @author E. Getchell
+ *
+ */
 @ApplicationPath("/rest")
 public class RestEndpointApplication extends Application 
 {

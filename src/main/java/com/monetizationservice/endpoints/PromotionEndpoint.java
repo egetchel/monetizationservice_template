@@ -24,12 +24,23 @@ import com.ezpaymentprocessing.utils.RestClient;
 import com.monetizationservice.services.PromotionService;
 import com.monetizationservice.services.SmsService;
 
-
-// http://localhost:8081/monetizationservice/rest/qualifyPromotion?merchantId=monetizationservice&mobileNumber=5556667777&amount=10
-
+/**
+ * Enpoint to qualify a promotion
+ * @author egetchel
+ *
+ */
 @Path ("/qualifyPromotion")
 public class PromotionEndpoint {
 	
+	/**
+	 * GET method
+	 * Example: http://localhost:8081/monetizationservice/rest/qualifyPromotion?merchantId=monetizationservice&mobileNumber=5556667777&amount=10
+	 * @param merchantId
+	 * @param amount
+	 * @param mobileNumber
+	 * @param request
+	 * @return
+	 */
 	@GET
 	@Produces("application/json")
 	public Response qualifyPromotion(

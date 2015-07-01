@@ -1,5 +1,10 @@
 package com.ezpaymentprocessing.model;
 
+/**
+ * Model of an inventory item
+ * @author E. Getchell
+ *
+ */
 public class InventoryItem {
 	String price;
 	String description;

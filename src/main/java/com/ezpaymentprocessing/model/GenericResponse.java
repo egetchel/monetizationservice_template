@@ -1,7 +1,9 @@
 package com.ezpaymentprocessing.model;
 
 /**
- * Data modeling a generic response
+ * Data modeling a generic response. 
+ * This was included as having a response that returns "OK" makes debugging easier when using 
+ * HTTP tracing utilities in the browser (thinking Firebug here), vs a endpoint that does not return a response 
  * @author E. Getchell
  *
  */

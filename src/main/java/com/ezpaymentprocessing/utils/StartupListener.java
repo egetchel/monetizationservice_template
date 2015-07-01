@@ -61,9 +61,9 @@ public class StartupListener implements ServletContextListener
 				i.add(item);
 
 			}
-			//fileReader.close();
-			System.out.println("Contents of file:");
-			System.out.println(i.toString());
+			in.close();
+			//System.out.println("Contents of file:");
+			//System.out.println(i.toString());
 			ConfigManager.setInventory(i);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -71,6 +71,7 @@ public class StartupListener implements ServletContextListener
 		
 		if (ConfigManager.getGearRegistrationURL() != null)
 		{
+			// Register this application with the "mothership" - EZPayment Processing
 			RestClient client = new RestClient(); 
 			try
 			{
@@ -91,6 +92,8 @@ public class StartupListener implements ServletContextListener
 	}
 	public void contextDestroyed(ServletContextEvent contextEvent) 
 	{
+		// Strangeness is about with this method enabled.  Need to dig into some of this as this was 
+		// a last minute addition to prevent having to cycle the EZPayment processing application during gear delete operations in OSE
 /*		
 		context = contextEvent.getServletContext();
 		System.out.println("Context Destroyed");

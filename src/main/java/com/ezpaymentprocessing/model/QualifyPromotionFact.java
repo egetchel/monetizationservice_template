@@ -1,7 +1,11 @@
 package com.ezpaymentprocessing.model;
 
 /**
- * Result class from qualifying a promotion
+ * Fact model for qualifying a promotion in the rules engine
+ * 
+ * NOTE: The expectation is that the rule will modify this object as a result of a rule
+ * being fired.
+ * 
  * @author E. Getchell
  *
  */
@@ -10,9 +14,11 @@ public class QualifyPromotionFact
 	private Integer purchaseAmount;
 	private String merchantId;
 	
-	// Updated by rules enging
+	// Updated by rules engine
 	private String message = null;
+	// Updated by rules engine
 	private boolean qualified = false;
+	// Updated by rules engine
 	private Integer discount = null;
 	
 
